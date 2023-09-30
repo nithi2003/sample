@@ -1,0 +1,64 @@
+# Jenkins Pipeline Documentation
+
+## Introduction
+This documentation provides an overview of our Jenkins pipeline, which automates the process of detecting code changes, compiling code in different programming languages (C++, Java, Python), and reporting the compilation status.
+
+## Table of Contents
+- [Overview](#overview)
+- [Pipeline Structure](#pipeline-structure)
+- [Matrix Build](#matrix-build)
+- [Stages within the Matrix Build](#stages-within-the-matrix-build)
+  - [Compile cpp](#compile-cpp)
+  - [Compile java](#compile-java)
+  - [Compile python](#compile-python)
+- [getChangedFiles Function](#getchangedfiles-function)
+- [Build Result](#build-result)
+- [Usage](#usage)
+- [Customization](#customization)
+- [Conclusion](#conclusion)
+
+## Overview
+Our Jenkins pipeline automates the compilation and testing of code changes in various programming languages. It provides feedback on whether the compilation process was successful or not, helping streamline our development process.
+
+## Pipeline Structure
+The pipeline comprises the following stages:
+
+### Matrix Build
+- The matrix build allows us to run separate jobs for different programming languages (C++, Java, Python) using the 'LANGUAGE' axis.
+
+### Stages within the Matrix Build
+Each stage corresponds to a specific programming language and includes steps to detect changes, compile code, and report the compilation status.
+
+#### Compile cpp
+- Detects changes in C++ code files.
+- Compiles each changed C++ file using the `g++` compiler.
+- Reports whether the compilation was successful.
+
+#### Compile java
+- Detects changes in Java code files.
+- Compiles each changed Java file using the `javac` compiler.
+- Reports whether the compilation was successful.
+
+#### Compile python
+- Detects changes in Python code files.
+- Runs each changed Python file using the `python` interpreter.
+- Reports whether the execution was successful.
+
+## getChangedFiles Function
+The `getChangedFiles` function identifies changed files within a specified language directory, enabling us to focus on compiling only those files.
+
+## Build Result
+The overall build result is determined by the compilation status of the individual files. If any compilation fails, the build is marked as 'FAILURE'; otherwise, it remains 'SUCCESS.'
+
+## Usage
+To use this Jenkins pipeline:
+1. Set up a Multibranch Pipeline project in Jenkins.
+2. Configure the project with the provided Jenkinsfile.
+3. Ensure that the necessary tools (e.g., Python, Java, g++) are available on the Jenkins agent.
+4. Organize your Git repository with separate language folders (e.g., 'cpp/', 'java/', 'python/').
+
+## Customization
+You can customize the pipeline to support additional programming languages or modify compilation and testing steps to suit your project's needs.
+
+## Conclusion
+Our Jenkins pipeline streamlines the code compilation process, providing timely feedback on compilation status. By following this documentation, you can effectively use and customize the pipeline for your projects.

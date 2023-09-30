@@ -1,0 +1,95 @@
+Jenkins Pipeline Documentation
+Introduction
+This documentation outlines the process of setting up and configuring a Jenkins Multibranch Pipeline to automate the detection of code changes, compile code written in various programming languages (such as C++, Java, and Python), and report the compilation status. This automated pipeline streamlines our development process and provides timely feedback.
+
+Table of Contents
+Overview
+Pipeline Structure
+Matrix Build
+Stages within the Matrix Build
+Compile cpp
+Compile java
+Compile python
+getChangedFiles Function
+Build Result
+Usage
+Customization
+Conclusion
+Overview
+Our Jenkins pipeline automates the compilation and testing of code changes in various programming languages, providing feedback on whether the compilation process was successful. This streamlined approach enhances our development process and ensures code quality.
+
+Pipeline Structure
+Our Jenkins pipeline consists of the following essential components:
+
+Matrix Build
+The "Matrix Build" stage allows us to execute separate jobs for different programming languages (C++, Java, Python) using the 'LANGUAGE' axis.
+
+Stages within the Matrix Build
+Each programming language has its own dedicated stage within the pipeline. These stages include steps to detect changes, compile the code, and report the compilation status.
+
+Compile cpp
+The "Compile cpp" stage performs the following actions:
+
+Detects changes in C++ code files.
+Compiles each changed C++ file using the g++ compiler.
+Reports whether the compilation was successful.
+Compile java
+The "Compile java" stage handles Java code compilation with these steps:
+
+Detects changes in Java code files.
+Compiles each changed Java file using the javac compiler.
+Reports whether the compilation was successful.
+Compile python
+The "Compile python" stage focuses on Python code execution:
+
+Detects changes in Python code files.
+Runs each changed Python file using the python interpreter.
+Reports whether the execution was successful.
+getChangedFiles Function
+The custom getChangedFiles function identifies altered files within a specified language directory. This function allows us to focus on compiling only those files, enhancing efficiency.
+
+Build Result
+The overall build result is determined by the compilation status of individual files. If any compilation fails, the entire build is marked as 'FAILURE'; otherwise, it remains 'SUCCESS.'
+
+Usage
+To effectively use this Jenkins pipeline, follow these steps:
+
+Set up a Multibranch Pipeline project in Jenkins:
+
+Click on "New Item" in the Jenkins dashboard.
+Enter a descriptive name for your project (e.g., "My Multibranch Pipeline").
+Select "Multibranch Pipeline" as the project type and click "OK."
+Configure Source Code Management:
+
+In the project configuration, navigate to the "Branch Sources" section.
+Add a new source (e.g., GitHub).
+Provide the URL of your code repository (e.g., https://github.com/yourusername/yourrepository.git).
+If using GitHub, choose the credentials you configured earlier.
+Build Configuration:
+
+In the project configuration, under "Build Configuration," select "by Jenkinsfile."
+Choose a script path if you have a specific file (e.g., Jenkinsfile) in your repository. Alternatively, you can use the default Jenkinsfile.
+Save and Scan for Branches:
+
+Save your project configuration.
+Jenkins will automatically initiate scanning of your repository for branches and create pipeline jobs for each branch.
+Create a Jenkinsfile:
+
+In your code repository, create a Jenkinsfile at the root or within each branch you want to build. The Jenkinsfile defines the steps your pipeline will execute.
+Pipeline Script (Jenkinsfile):
+
+Define your pipeline script within the Jenkinsfile. This script will include stages, steps, and any necessary logic for your build process.
+Commit and Push:
+
+Commit the Jenkinsfile to your code repository and push it to trigger the pipeline.
+Pipeline Execution:
+
+Jenkins will automatically detect changes in your branches and execute the pipeline according to the defined script.
+View Results:
+
+You can view the build results, logs, and artifacts in the Jenkins dashboard.
+Customization
+You have the flexibility to customize the pipeline script to support additional programming languages or modify compilation and testing steps to align with your project's specific needs.
+
+Conclusion
+Our Jenkins pipeline significantly streamlines the code compilation process, providing real-time feedback on compilation status and enhancing our development workflow. By following this documentation, you can effectively implement and customize the pipeline to suit the requirements of your projects.
